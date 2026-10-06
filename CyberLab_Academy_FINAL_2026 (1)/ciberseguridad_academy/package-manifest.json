@@ -1,0 +1,10 @@
+{
+  "version": "CyberLab Academy Final 2026",
+  "levels": 100,
+  "specific_exercises": 100,
+  "theory_modules": 12,
+  "pdf_count": 27,
+  "pdf_directory": "pdf/",
+  "free_levels": 5,
+  "xp_per_level": 50
+}

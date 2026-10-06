@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CyberLab Academy Pro — Aprende Ciberseguridad</title>
+<meta name="description" content="Plataforma educativa de ciberseguridad con 100 niveles, terminal interactiva y laboratorios éticos.">
+<style>
+:root{
+  --bg:#070b12;--panel:#0d1420;--panel2:#111b29;--line:#1e2c3f;
+  --text:#e8f0f7;--muted:#8ea2b7;--green:#37f59b;--cyan:#41d9ff;
+  --yellow:#ffd166;--red:#ff5572;--purple:#a78bfa;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 15% 0%,#102235 0,#070b12 36%);color:var(--text);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,textarea{font:inherit} button{cursor:pointer}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);background:rgba(7,11,18,.92);backdrop-filter:blur(18px);padding:20px 16px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:17px;margin-bottom:26px}
+.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--green),var(--cyan));color:#061016;display:grid;place-items:center;font-weight:900;box-shadow:0 0 30px #37f59b33}
+.nav{display:grid;gap:7px}.nav button{border:1px solid transparent;background:transparent;color:var(--muted);padding:11px 12px;border-radius:10px;text-align:left}.nav button:hover,.nav button.active{background:#101a28;border-color:var(--line);color:#fff}
+.sidebar .tip{margin-top:auto;border:1px solid var(--line);background:#0b121d;padding:13px;border-radius:12px;color:var(--muted);font-size:12px}
+main{min-width:0}.topbar{height:68px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:#070b12cc;backdrop-filter:blur(16px);position:sticky;top:0;z-index:5}
+.status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}.dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green)}
+.profile{display:flex;gap:10px;align-items:center}.xp{color:var(--green);font-weight:700}.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#243c5a,#17263a);display:grid;place-items:center}
+.content{padding:30px;max-width:1450px;margin:auto}.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;margin-bottom:18px}
+.heroCard,.card{border:1px solid var(--line);background:linear-gradient(145deg,#0e1724,#0b111b);border-radius:17px;box-shadow:0 15px 50px #00000022}
+.heroCard{padding:28px;position:relative;overflow:hidden}.heroCard:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-100px;top:-130px;background:#37f59b12;filter:blur(5px)}
+.kicker{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+h1{font-size:clamp(28px,4vw,46px);line-height:1.03;margin:9px 0 13px;max-width:760px} h2{margin:0 0 15px} h3{margin:0 0 6px}
+.hero p{color:var(--muted);max-width:720px}.actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#111b29;color:#fff;padding:10px 15px;border-radius:10px;font-weight:700}.btn.primary{background:var(--green);color:#04110b;border-color:var(--green)}.btn:hover{transform:translateY(-1px)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.stat{padding:18px}.stat b{font-size:28px}.stat span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.progress{height:8px;background:#162333;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:99px}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.card{padding:20px}.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.level{aspect-ratio:1;border:1px solid var(--line);background:#0b131f;border-radius:10px;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative}.level strong{font-size:13px}.level small{font-size:9px}.level.done{border-color:#23734e;background:#0d211a;color:var(--green)}.level.current{outline:2px solid var(--cyan);color:#fff;background:#122131}.level.locked{opacity:.5}
+.badge{display:inline-flex;padding:4px 8px;border-radius:999px;background:#142033;color:var(--cyan);font-size:10px;font-weight:800}
+.lesson{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #172335}.lesson:last-child{border-bottom:0}.lessonIcon{width:36px;height:36px;border-radius:9px;background:#101d2c;display:grid;place-items:center;color:var(--green);flex:0 0 auto}.lesson p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.section{margin-top:18px}.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.tool{padding:15px;background:#0b131f;border:1px solid var(--line);border-radius:12px}.tool code{color:var(--green);font-size:12px}.tool p{color:var(--muted);font-size:12px}
+.lab{display:grid;grid-template-columns:1fr 1fr;gap:14px}.terminal{background:#05090e;border:1px solid #1b2b3a;border-radius:12px;overflow:hidden}.termhead{padding:9px 12px;background:#0d1622;color:var(--muted);font-size:11px;display:flex;gap:6px}.termhead i{width:8px;height:8px;border-radius:50%;background:#3a4a5b}.termbody{padding:14px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;min-height:270px}.out{white-space:pre-wrap;color:#b9c7d4}.prompt{display:flex;gap:7px;align-items:center}.prompt span{color:var(--green)}.prompt input{flex:1;background:none;border:0;outline:0;color:#eaf7ff;font:inherit}.question{padding:16px;border:1px solid var(--line);border-radius:12px;background:#0a121d}.answer{display:flex;gap:8px;margin-top:12px}.answer input{flex:1;background:#07101a;border:1px solid var(--line);color:#fff;padding:11px;border-radius:9px;outline:none}.feedback{margin-top:12px;padding:12px;border-radius:10px;display:none;font-size:13px}.feedback.ok{display:block;background:#0b2118;border:1px solid #1f6847;color:#9dffcf}.feedback.bad{display:block;background:#25111a;border:1px solid #713043;color:#ffb3c1}
+.toast{position:fixed;right:22px;bottom:22px;background:#111b29;border:1px solid var(--line);padding:12px 15px;border-radius:10px;box-shadow:0 10px 40px #0008;display:none;z-index:20}
+.search{width:100%;background:#09121d;border:1px solid var(--line);color:#fff;border-radius:9px;padding:10px;outline:none;margin-bottom:10px}
+
+.theoryHero{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px;padding:24px}
+.cert{min-width:105px;height:105px;border:1px solid #2a4a5e;border-radius:18px;display:grid;place-items:center;text-align:center;color:var(--cyan);font-size:10px;letter-spacing:.15em;background:radial-gradient(circle,#153145,#0a121d)}
+.cert b{font-size:26px;color:#fff}
+.theoryGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.theorySummary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 18px}
+.theorySummary>div{padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,rgba(17,27,41,.9),rgba(10,16,25,.85));box-shadow:0 8px 30px rgba(0,0,0,.15)}
+.theorySummary b{display:block;font-size:20px;color:#fff}
+.theorySummary span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.module{padding:18px;border:1px solid var(--line);background:#0b131f;border-radius:14px;transition:.2s}
+.module:hover{transform:translateY(-2px);border-color:#2c455e}
+.moduleTop{display:flex;justify-content:space-between;gap:10px}
+.module p{color:var(--muted);font-size:12px}
+.module ul{margin:10px 0;padding-left:20px;color:#b7c6d5;font-size:12px}
+.pdfRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.testBtn{border:1px solid #29425a;background:#101d2b;color:#fff;padding:8px 11px;border-radius:9px;font-size:12px;font-weight:700}
+.testBtn:hover{border-color:var(--cyan)}
+.test{display:none;margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.q{padding:12px;border:1px solid var(--line);border-radius:10px;margin:9px 0;background:#08111b}
+.q label{display:block;padding:6px;color:#b7c6d5;cursor:pointer}
+.q label:hover{background:#101d2b;border-radius:7px}
+.result{margin-top:10px;padding:10px;border-radius:9px;display:none}
+.result.good{display:block;background:#0b2118;color:#9dffcf;border:1px solid #1f6847}
+.result.bad{display:block;background:#25111a;color:#ffb3c1;border:1px solid #713043}
+@media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{height:auto;position:relative;border-right:0;border-bottom:1px solid var(--line)}.nav{grid-template-columns:repeat(2,1fr)}.sidebar .tip{display:none}.hero,.grid,.lab{grid-template-columns:1fr}.tools{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.content{padding:18px}.topbar{padding:0 15px}.levels{grid-template-columns:repeat(5,1fr)}.nav{grid-template-columns:1fr 1fr}.tools{grid-template-columns:1fr}}
+
+.loginGate{position:fixed;inset:0;background:rgba(2,7,13,.82);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:50}
+.loginCard{width:min(440px,calc(100% - 32px));background:#0b1420;border:1px solid #26394d;border-radius:18px;padding:24px;box-shadow:0 30px 100px rgba(0,0,0,.5)}
+.loginCard h2{margin:4px 0 8px}.loginCard p{color:var(--muted);line-height:1.55;font-size:13px}
+.loginCard input{width:100%;box-sizing:border-box;background:#07101a;border:1px solid var(--line);color:#fff;padding:12px;border-radius:10px;margin:7px 0;outline:none}
+.loginActions{display:flex;gap:8px;margin-top:10px}.loginActions button{flex:1}
+.userStats{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.statBox{padding:12px 15px;border:1px solid var(--line);border-radius:12px;background:#0a121d;min-width:110px}
+.statBox b{display:block;font-size:18px}.statBox span{font-size:11px;color:var(--muted)}
+.level.done{border-color:#1f6847;box-shadow:0 0 0 1px rgba(31,104,71,.25) inset}.level.current{box-shadow:0 0 0 1px rgba(51,226,184,.5) inset,0 8px 28px rgba(51,226,184,.08)}
+.level.locked{opacity:.55}
+.level small{display:block;max-width:110px;white-space:normal}
+.lockNote{margin-top:12px;padding:12px;border-radius:10px;border:1px dashed #3a4c60;color:var(--muted);font-size:12px}
+.levelHead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.challengeText{font-size:15px;line-height:1.65;color:#dbe8f3}
+.hint{display:none;margin-top:10px;padding:11px;border-radius:10px;background:#151c0d;border:1px solid #4c5a26;color:#d8e8a1;font-size:13px}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">⌘</div> CyberLab Academy</div>
+  <nav class="nav">
+    <button class="active" onclick="show('dashboard',this)">◈ Dashboard</button>
+    <button onclick="show('levels',this)">▦ 100 niveles</button>
+    <button onclick="show('theory',this)">▤ Teoría & Tests</button><button onclick="show('lab',this)">▣ Laboratorio</button>
+    <button onclick="show('tools',this)">⚙ Herramientas</button>
+  </nav>
+  <div class="tip"><b style="color:#fff">Modo seguro</b><br>Los ejercicios están diseñados para practicar únicamente en laboratorios y sistemas autorizados.</div>
+</aside>
+<main>
+<header class="topbar"><div class="status"><i class="dot"></i> Plataforma operativa · Sandbox educativo</div><div class="profile"><span class="xp" id="xp">0 XP</span><span class="badge" id="userLevel">Usuario Lv. 1</span><div class="avatar" id="avatar">A</div></div></header>
+<div class="content">
+
+<section id="dashboard">
+<div class="hero">
+  <div class="heroCard">
+    <div class="kicker">Ruta · Fundamentos → Blue Team → Red Team ético</div>
+    <h1>Aprende ciberseguridad jugando.</h1>
+    <p>100 niveles progresivos con retos prácticos, terminal interactiva, corrección instantánea y explicaciones claras. Todo dentro de un entorno educativo controlado.</p>
+    <div class="actions"><button class="btn primary" onclick="startLevel(1)">Continuar nivel 1 →</button><button class="btn" onclick="show('levels')">Ver todos los niveles</button></div>
+  </div>
+  <div class="stats">
+    <div class="card stat"><b>100</b><span>Niveles disponibles</span></div>
+    <div class="card stat"><b>8</b><span>Rutas de aprendizaje</span></div>
+    <div class="card stat"><b>120</b><span>XP conseguidos</span></div>
+    <div class="card stat"><b>1</b><span>Nivel completado</span></div>
+  </div>
+</div>
+<div class="grid">
+  <div class="card"><h2>Tu progreso</h2><div style="display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:7px"><span>Nivel 1 de 100</span><span>1%</span></div><div class="progress"><i style="width:1%"></i></div>
+    <div class="lesson"><div class="lessonIcon">01</div><div><b>Fundamentos de redes</b><p>IP, puertos, protocolos y modelo TCP/IP.</p></div><span class="badge">ACTIVO</span></div>
+    <div class="lesson"><div class="lessonIcon">02</div><div><b>Linux & terminal</b><p>Comandos, permisos, procesos y archivos.</p></div></div>
+    <div class="lesson"><div class="lessonIcon">03</div><div><b>Web security</b><p>HTTP, sesiones, autenticación y OWASP.</p></div></div>
+  </div>
+  <div class="card"><h2>Rutas</h2>
+    <div class="lesson"><div class="lessonIcon">⌁</div><div><b>Redes</b><p>15 niveles · principiante</p></div></div>
+    <div class="lesson"><div class="lessonIcon">▣</div><div><b>Linux</b><p>15 niveles · principiante</p></div></div>
+    <div class="lesson"><div class="lessonIcon">◇</div><div><b>Web & OWASP</b><p>20 niveles · intermedio</p></div></div>
+    <div class="lesson"><div class="lessonIcon">◉</div><div><b>Blue Team</b><p>15 niveles · intermedio</p></div></div>
+    <div class="lesson"><div class="lessonIcon">⚡</div><div><b>Hacking ético</b><p>20 niveles · avanzado</p></div></div>
+  </div>
+</div>
+</section>
+
+<section id="levels" style="display:none">
+<div class="card"><div style="display:flex;justify-content:space-between;gap:12px;align-items:end"><div><div class="kicker">Mapa de aprendizaje</div><h2>100 niveles</h2><span style="color:var(--muted)">Cada nivel añade una habilidad nueva y un reto práctico.</span></div><span class="badge" id="levelCounter">0 / 100</span></div>
+<div class="section levels" id="levelGrid"></div></div>
+</section>
+
+<section id="lab" style="display:none">
+<div class="grid">
+<div class="card">
+  <div class="levelHead">
+    <div><div class="kicker" id="labKicker">Nivel 1 · GRATIS</div><h2 id="labTitle">Fundamentos de redes</h2></div>
+    <span class="badge" id="labXP">+50 XP</span>
+  </div>
+  <div class="question" style="margin-top:14px">
+    <b>Enunciado</b><p class="challengeText" id="labPrompt"></p>
+    <div class="answer"><input id="answer" autocomplete="off" spellcheck="false" placeholder="Escribe tu respuesta y pulsa Enter…"><button class="btn primary" onclick="checkAnswer()">Comprobar</button></div>
+    <div class="hint" id="hint"></div><div id="feedback" class="feedback"></div>
+  </div>
+  <div class="lockNote" id="labLockNote"></div>
+</div>
+<div class="card">
+  <h2>Terminal del laboratorio</h2>
+  <div class="terminal"><div class="termhead"><i></i><i></i><i></i><span>student@sandbox</span></div>
+    <div class="termbody"><div class="out" id="out">CyberLab Sandbox v2
+Sistema aislado · sin acceso a objetivos externos.
+Escribe "help" para ver comandos disponibles.
+
+</div><div class="prompt"><span>student@sandbox:~$</span><input id="cmd" autocomplete="off" spellcheck="false" placeholder="help"></div></div>
+  </div>
+  <div class="userStats"><div class="statBox"><b id="statXP">0</b><span>XP total</span></div><div class="statBox"><b id="statUserLevel">1</b><span>nivel usuario</span></div><div class="statBox"><b id="statCompleted">0/100</b><span>retos completados</span></div></div>
+</div>
+</div>
+</section>
+
+
+<section id="theory" style="display:none">
+<div class="card theoryHero">
+  <div>
+    <div class="kicker">Academia profesional · teoría + evaluación</div>
+    <h2>Biblioteca de Ciberseguridad</h2>
+    <p style="color:var(--muted);max-width:850px">Contenido original estructurado a partir de áreas académicas públicas del programa de Ciberseguridad del IEP: fundamentos, hacking ético, legalidad, forense, riesgos, auditoría, redes, cloud, criptografía y arquitectura segura.</p>
+  </div>
+  <div class="cert">CURRÍCULO<br><b>PRO</b></div>
+</div>
+<div class="theorySummary">
+  <div><b>12</b><span>módulos</span></div>
+  <div><b>24+</b><span>evaluaciones</span></div>
+  <div><b>100</b><span>niveles prácticos</span></div>
+  <div><b>Sandbox</b><span>entorno seguro</span></div>
+</div>
+<div class="theoryGrid" id="theoryGrid"></div>
+</section>
+<section id="tools" style="display:none">
+<div class="card"><div class="kicker">Hacking ético</div><h2>Arsenal por laboratorio</h2><p style="color:var(--muted)">Herramientas reales explicadas para prácticas autorizadas. En esta demo se muestran como referencia y los ejercicios se ejecutan dentro del sandbox.</p>
+<input class="search" id="toolSearch" placeholder="Buscar herramienta, categoría o propósito…" oninput="renderTools()">
+<div class="tools" id="toolGrid"></div></div>
+</section>
+</div></main>
+</div>
+<div class="toast" id="toast"></div>
+<div class="loginGate" id="loginGate">
+<div class="loginCard">
+<div class="kicker">CYBERLAB ACADEMY · CUENTA</div>
+<h2>Continúa tu formación</h2>
+<p>Los niveles 1–5 son gratuitos. Desde el nivel 6 se requiere iniciar sesión para continuar.</p>
+<input id="loginName" placeholder="Nombre de alumno">
+<input id="loginEmail" type="email" placeholder="Correo electrónico">
+<div class="loginActions"><button class="btn" onclick="closeLogin()">Cancelar</button><button class="btn primary" onclick="doLogin()">Iniciar sesión</button></div>
+<p style="font-size:11px;margin-bottom:0">Modo demo local: esta versión no envía credenciales a un servidor. Para producción debe conectarse a un backend de autenticación.</p>
+</div></div>
+<script>
+const levels=[
+"Fundamentos de redes","Direcciones IP","Puertos TCP/UDP","DNS","HTTP básico","TLS y certificados","Modelo OSI","Subnetting","ARP","DHCP",
+"Linux: navegación","Linux: archivos","Linux: permisos","Linux: procesos","Linux: usuarios","Linux: grep/find","Linux: pipes","Linux: logs","Linux: servicios","Linux: scripting",
+"Python básico","Python para seguridad","Regex","Hashes","Criptografía básica","Codificación","Base64","JWT","Sesiones","Cookies",
+"HTTP requests","Headers","Métodos HTTP","Status codes","Formularios","Autenticación","Control de acceso","CORS","CSRF","CSP",
+"OWASP Top 10","SQLi: conceptos","XSS: conceptos","Path traversal","SSRF: conceptos","Command injection","IDOR","File upload","Deserialización","API security",
+"Wireshark","Análisis PCAP","DNS analysis","HTTP analysis","Firewall","IDS/IPS","SIEM","Logs web","Threat hunting","IOC",
+"Phishing awareness","Ingeniería social","Malware analysis seguro","YARA","Sigma","MITRE ATT&CK","Triage","Forensics","Memory forensics","Timeline",
+"Recon autorizado","Nmap en laboratorio","Enumeración de servicios","Banner grabbing","Vulnerabilidades","CVSS","Gestión de parches","Modelado de amenazas","OSINT ético","Scope y reglas",
+"Burp Suite","Proxy HTTP","Repeater","Intruder en sandbox","ZAP","Nikto en laboratorio","Gobuster en laboratorio","ffuf en sandbox","Metasploit en sandbox","Exploit lifecycle",
+"Red team planning","Purple team","Privilege escalation conceptos","Persistencia conceptos","Movimiento lateral conceptos","Segmentación","Hardening","Detección","Respuesta","Capstone"
+];
+const tools=[
+["Nmap","Reconocimiento autorizado","nmap","Descubrimiento y enumeración dentro de un scope permitido."],
+["Wireshark","Análisis de red","wireshark","Inspección visual de tráfico capturado en un laboratorio."],
+["Burp Suite","Seguridad web","burpsuite","Proxy para estudiar peticiones HTTP en aplicaciones propias o de laboratorio."],
+["OWASP ZAP","Seguridad web","zaproxy","Proxy y análisis de aplicaciones web en entornos autorizados."],
+["Metasploit","Explotación controlada","metasploit","Framework para validar vulnerabilidades en máquinas de laboratorio."],
+["Gobuster","Enumeración web","gobuster","Descubrimiento de contenido en aplicaciones de práctica."],
+["ffuf","Enumeración web","ffuf","Fuzzing controlado de rutas y parámetros en sandbox."],
+["Nikto","Auditoría web","nikto","Comprobaciones de configuración sobre servidores autorizados."],
+["YARA","Threat hunting","yara","Identificación de patrones en muestras y archivos de laboratorio."],
+["Sigma","Detección","sigma","Reglas portables para detectar comportamientos en logs."],
+["CyberChef","Análisis","cyberchef","Transformaciones, decodificación y análisis de datos."],
+["John the Ripper","Cracking educativo","john","Auditoría de hashes propios dentro de ejercicios controlados."]
+];
+function show(id,btn){
+ document.querySelectorAll("main section").forEach(s=>s.style.display="none");
+ document.getElementById(id).style.display="block";
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ if(btn) btn.classList.add("active");
+ if(id==="levels") renderLevels(); if(id==="tools") renderTools();
+}
+
+const FREE_LEVELS=5;
+const XP_PER_LEVEL=50;
+const USER_XP_PER_LEVEL=100;
+let currentLevel=Number(localStorage.getItem("cyberlab_current_level")||1);
+let completedLevels=JSON.parse(localStorage.getItem("cyberlab_completed_levels")||"[]");
+let userXP=Number(localStorage.getItem("cyberlab_user_xp")||0);
+let loggedIn=localStorage.getItem("cyberlab_logged_in")==="1";
+let username=localStorage.getItem("cyberlab_username")||"";
+
+const levelData=[{"id":1,"name":"Fundamentos de redes","topic":"Fundamentos","xp":50,"prompt":"Consulta las interfaces del laboratorio Linux y escribe el comando que muestra sus direcciones.","answers":["ip addr"],"hint":"Piensa en el comando moderno de Linux que empieza por «ip».","explanation":"ip addr muestra interfaces, direcciones y estado de red."},{"id":2,"name":"Direcciones IP","topic":"Fundamentos","xp":50,"prompt":"La interfaz del laboratorio tiene 10.10.10.24/24. ¿Qué versión del protocolo IP utiliza esa dirección?","answers":["IPv4"],"hint":"Es la versión de IP de 32 bits.","explanation":"IPv4 utiliza direcciones de 32 bits."},{"id":3,"name":"Puertos TCP/UDP","topic":"Fundamentos","xp":50,"prompt":"Una aplicación necesita transporte fiable y orientado a conexión. Escribe el protocolo.","answers":["TCP"],"hint":"Es el protocolo fiable frente a UDP.","explanation":"TCP proporciona transporte orientado a conexión y fiable."},{"id":4,"name":"DNS","topic":"Fundamentos","xp":50,"prompt":"El host lab.local debe resolverse a una dirección IP. ¿Qué protocolo realiza esa resolución?","answers":["DNS"],"hint":"Empieza por D.","explanation":"DNS resuelve nombres mediante registros."},{"id":5,"name":"HTTP básico","topic":"Fundamentos","xp":50,"prompt":"El servidor responde con 200. ¿Qué elemento de HTTP representa ese número?","answers":["código de estado"],"hint":"Es la categoría numérica de la respuesta.","explanation":"Los códigos de estado indican el resultado de una petición HTTP."},{"id":6,"name":"TLS y certificados","topic":"Fundamentos","xp":50,"prompt":"Una conexión HTTPS necesita proteger el canal y autenticar al servidor. ¿Qué protocolo criptográfico se utiliza?","answers":["TLS"],"hint":"Es el protocolo de seguridad de las sesiones web.","explanation":"TLS protege los datos en tránsito y los certificados permiten autenticar identidades."},{"id":7,"name":"Modelo OSI","topic":"Fundamentos","xp":50,"prompt":"¿En qué capa OSI se encuentran IP y el encaminamiento? Escribe el nombre de la capa.","answers":["red"],"hint":"Es la capa 3.","explanation":"La capa de red se ocupa del direccionamiento lógico y encaminamiento."},{"id":8,"name":"Subnetting","topic":"Fundamentos","xp":50,"prompt":"Una red /24 se divide en redes /26. ¿Cuántas subredes /26 se obtienen?","answers":["4"],"hint":"Se toman 2 bits adicionales.","explanation":"2² = 4 subredes."},{"id":9,"name":"ARP","topic":"Fundamentos","xp":50,"prompt":"En una LAN necesitas conocer la MAC asociada a una IPv4 local. ¿Qué protocolo se utiliza?","answers":["ARP"],"hint":"Relaciona IPv4 con MAC.","explanation":"ARP resuelve IPv4 local a MAC."},{"id":10,"name":"DHCP","topic":"Fundamentos","xp":50,"prompt":"Un equipo nuevo necesita recibir automáticamente IP, máscara y gateway. ¿Qué protocolo usarías?","answers":["DHCP"],"hint":"Es el protocolo de configuración dinámica.","explanation":"DHCP entrega parámetros de red automáticamente."},{"id":11,"name":"Linux: navegación","topic":"Linux","xp":50,"prompt":"Estás en /home/student y quieres listar el contenido. Escribe el comando.","answers":["ls"],"hint":"Es el comando clásico para listar.","explanation":"ls lista el contenido de un directorio."},{"id":12,"name":"Linux: archivos","topic":"Linux","xp":50,"prompt":"Crea en el laboratorio un archivo vacío llamado evidencia.txt. ¿Qué comando usarías?","answers":["touch"],"hint":"El comando puede crear un archivo vacío.","explanation":"touch crea un archivo vacío."},{"id":13,"name":"Linux: permisos","topic":"Linux","xp":50,"prompt":"Necesitas modificar permisos de un archivo Linux. ¿Qué comando utilizarías?","answers":["chmod"],"hint":"Significa change mode.","explanation":"chmod modifica permisos."},{"id":14,"name":"Linux: procesos","topic":"Linux","xp":50,"prompt":"Quieres consultar los procesos activos. Escribe un comando Linux habitual.","answers":["ps"],"hint":"Son dos letras y comienza por p.","explanation":"ps muestra procesos."},{"id":15,"name":"Linux: usuarios","topic":"Linux","xp":50,"prompt":"Quieres saber qué usuario está ejecutando tu sesión. ¿Qué comando usarías?","answers":["whoami"],"hint":"La pregunta en inglés es literalmente «who am I».","explanation":"whoami muestra el usuario efectivo."},{"id":16,"name":"Linux: grep/find","topic":"Linux","xp":50,"prompt":"Necesitas localizar una palabra dentro de muchos logs. ¿Qué herramienta buscaría patrones línea a línea?","answers":["grep"],"hint":"Busca patrones en texto.","explanation":"grep filtra líneas que coinciden."},{"id":17,"name":"Linux: pipes","topic":"Linux","xp":50,"prompt":"Quieres enviar la salida de un comando a otro en la shell. ¿Qué símbolo utilizarías?","answers":["|"],"hint":"Es la barra vertical.","explanation":"El pipe conecta salida y entrada de procesos."},{"id":18,"name":"Linux: logs","topic":"Linux","xp":50,"prompt":"Durante una investigación defensiva necesitas consultar registros de eventos. ¿Qué término se usa para esos registros?","answers":["logs"],"hint":"Es el término habitual en operaciones de seguridad.","explanation":"Los logs contienen eventos útiles para análisis."},{"id":19,"name":"Linux: servicios","topic":"Linux","xp":50,"prompt":"En una distribución con systemd quieres administrar un servicio. ¿Qué herramienta usarías?","answers":["systemctl"],"hint":"Empieza por system.","explanation":"systemctl administra unidades de systemd."},{"id":20,"name":"Linux: scripting","topic":"Linux","xp":50,"prompt":"Quieres ejecutar una secuencia de comandos de forma repetible. ¿Qué tipo de archivo puedes crear con Bash?","answers":["script"],"hint":"Es una secuencia automatizada de comandos.","explanation":"Un script automatiza tareas."},{"id":21,"name":"Python básico","topic":"Programación y datos","xp":50,"prompt":"En Python necesitas mostrar un mensaje en pantalla. ¿Qué función usarías?","answers":["print"],"hint":"Es la función básica de salida.","explanation":"print muestra valores."},{"id":22,"name":"Python para seguridad","topic":"Programación y datos","xp":50,"prompt":"Necesitas almacenar una colección ordenada y modificable en Python. ¿Qué estructura usarías?","answers":["lista"],"hint":"Se escribe normalmente con corchetes.","explanation":"Una lista es ordenada y mutable."},{"id":23,"name":"Regex","topic":"Programación y datos","xp":50,"prompt":"Necesitas describir un patrón de texto para validar datos. ¿Qué tecnología usarías?","answers":["regex"],"hint":"Abreviatura de expresiones regulares.","explanation":"Regex permite describir patrones de texto."},{"id":24,"name":"Hashes","topic":"Programación y datos","xp":50,"prompt":"Quieres comprobar si un archivo cambió sin guardar otra copia. ¿Qué función criptográfica usarías?","answers":["hash"],"hint":"Produce una huella del contenido.","explanation":"Un hash permite detectar cambios."},{"id":25,"name":"Criptografía básica","topic":"Programación y datos","xp":50,"prompt":"Quieres impedir que terceros lean datos durante su almacenamiento o transporte. ¿Qué propiedad buscas proteger principalmente?","answers":["confidencialidad"],"hint":"Es una propiedad de CIA.","explanation":"El cifrado protege principalmente la confidencialidad."},{"id":26,"name":"Codificación","topic":"Programación y datos","xp":50,"prompt":"Tienes un dato en Base64. ¿Es cifrado o codificación? Escribe una palabra.","answers":["codificación"],"hint":"No necesita una clave secreta.","explanation":"Base64 es codificación, no cifrado."},{"id":27,"name":"Base64","topic":"Programación y datos","xp":50,"prompt":"¿Qué comando Linux permite codificar o decodificar datos en Base64?","answers":["base64"],"hint":"El comando tiene el mismo nombre.","explanation":"base64 realiza ambas operaciones."},{"id":28,"name":"JWT","topic":"Programación y datos","xp":50,"prompt":"Un token web tiene tres partes separadas por puntos. ¿Qué formato suele ser?","answers":["JWT"],"hint":"Son las siglas de JSON Web Token.","explanation":"JWT usa header, payload y firma."},{"id":29,"name":"Sesiones","topic":"Programación y datos","xp":50,"prompt":"Una aplicación HTTP necesita mantener el estado de un usuario entre peticiones. ¿Qué mecanismo suele utilizar?","answers":["cookie"],"hint":"Se almacena en el cliente.","explanation":"Las cookies suelen transportar identificadores de sesión."},{"id":30,"name":"Cookies","topic":"Programación y datos","xp":50,"prompt":"Una cookie de sesión no debería ser accesible desde JavaScript. ¿Qué atributo debe llevar?","answers":["HttpOnly"],"hint":"Su nombre describe su función.","explanation":"HttpOnly limita el acceso desde scripts."},{"id":31,"name":"HTTP requests","topic":"Seguridad web","xp":50,"prompt":"En una petición HTTP, ¿qué identifica el recurso que se solicita?","answers":["URL"],"hint":"Es la dirección del recurso.","explanation":"La URL identifica el recurso."},{"id":32,"name":"Headers","topic":"Seguridad web","xp":50,"prompt":"¿Cómo se llaman los metadatos que acompañan una petición o respuesta HTTP?","answers":["headers"],"hint":"En español: cabeceras.","explanation":"Los headers transportan metadatos."},{"id":33,"name":"Métodos HTTP","topic":"Seguridad web","xp":50,"prompt":"Quieres solicitar un recurso sin modificarlo. ¿Qué método HTTP usarías normalmente?","answers":["GET"],"hint":"Es el método de lectura habitual.","explanation":"GET solicita una representación."},{"id":34,"name":"Status codes","topic":"Seguridad web","xp":50,"prompt":"Una API devuelve 404. ¿Qué significa generalmente?","answers":["no encontrado"],"hint":"Es el significado habitual de 404.","explanation":"404 indica que el recurso no fue encontrado."},{"id":35,"name":"Formularios","topic":"Seguridad web","xp":50,"prompt":"Un formulario recibe datos del usuario. ¿Qué control debe aplicarse siempre en el servidor antes de procesarlos?","answers":["validación de entrada"],"hint":"Nunca confíes directamente en datos del cliente.","explanation":"La validación reduce entradas inesperadas."},{"id":36,"name":"Autenticación","topic":"Seguridad web","xp":50,"prompt":"Un sistema exige contraseña y un segundo factor. ¿Qué concepto describe esto?","answers":["MFA"],"hint":"Son las siglas de autenticación multifactor.","explanation":"MFA combina varios factores."},{"id":37,"name":"Control de acceso","topic":"Seguridad web","xp":50,"prompt":"Un empleado solo puede acceder a los recursos que necesita para su función. ¿Qué principio se aplica?","answers":["mínimo privilegio"],"hint":"Concede solo los permisos necesarios.","explanation":"El mínimo privilegio reduce impacto."},{"id":38,"name":"CORS","topic":"Seguridad web","xp":50,"prompt":"Una aplicación controla qué orígenes pueden realizar determinadas peticiones desde el navegador. ¿Qué mecanismo interviene?","answers":["CORS"],"hint":"Cross-Origin Resource Sharing.","explanation":"CORS controla solicitudes entre orígenes."},{"id":39,"name":"CSRF","topic":"Seguridad web","xp":50,"prompt":"Un sitio malicioso intenta provocar una acción usando la sesión autenticada de la víctima. ¿Qué vulnerabilidad se estudia?","answers":["CSRF"],"hint":"Cross-Site Request Forgery.","explanation":"CSRF abusa del contexto autenticado."},{"id":40,"name":"CSP","topic":"Seguridad web","xp":50,"prompt":"Quieres limitar desde qué fuentes puede ejecutar scripts un navegador. ¿Qué cabecera usarías?","answers":["Content-Security-Policy"],"hint":"Empieza por Content.","explanation":"CSP permite restringir recursos ejecutables."},{"id":41,"name":"OWASP Top 10","topic":"Seguridad web","xp":50,"prompt":"En OWASP Top 10:2025, ¿qué riesgo corresponde a A01?","answers":["pérdida de control de acceso"],"hint":"Es el número uno de la edición 2025.","explanation":"A01:2025 es Broken Access Control."},{"id":42,"name":"SQLi: conceptos","topic":"Seguridad web","xp":50,"prompt":"Una aplicación concatena datos de usuario directamente en una consulta SQL. ¿Qué clase de vulnerabilidad puede aparecer?","answers":["inyección"],"hint":"La entrada altera el intérprete.","explanation":"La inyección ocurre cuando datos no confiables se interpretan como instrucciones."},{"id":43,"name":"XSS: conceptos","topic":"Seguridad web","xp":50,"prompt":"Una aplicación inserta contenido no confiable en HTML sin codificación contextual. ¿Qué vulnerabilidad puede aparecer?","answers":["XSS"],"hint":"Cross-Site Scripting.","explanation":"XSS puede hacer que contenido controlado se interprete como script."},{"id":44,"name":"Path traversal","topic":"Seguridad web","xp":50,"prompt":"Una aplicación no valida correctamente referencias a archivos y permite atravesar directorios. ¿Qué vulnerabilidad es?","answers":["path traversal"],"hint":"Se relaciona con salir del directorio previsto.","explanation":"Path traversal puede exponer rutas fuera del directorio permitido."},{"id":45,"name":"SSRF: conceptos","topic":"Seguridad web","xp":50,"prompt":"Un servidor realiza peticiones a destinos proporcionados por el usuario sin restricciones adecuadas. ¿Qué vulnerabilidad es?","answers":["SSRF"],"hint":"Server-Side Request Forgery.","explanation":"SSRF hace que el servidor realice peticiones no previstas."},{"id":46,"name":"Command injection","topic":"Seguridad web","xp":50,"prompt":"Una aplicación pasa entrada del usuario a un intérprete de comandos sin separación segura. ¿Qué riesgo aparece?","answers":["command injection"],"hint":"La entrada termina interpretándose como comando.","explanation":"Command injection convierte datos en instrucciones."},{"id":47,"name":"IDOR","topic":"Seguridad web","xp":50,"prompt":"Un usuario cambia un identificador y obtiene datos de otro usuario porque el servidor no comprueba autorización. ¿Qué fallo es?","answers":["IDOR"],"hint":"Es un caso de control de acceso roto.","explanation":"IDOR afecta a la autorización sobre objetos."},{"id":48,"name":"File upload","topic":"Seguridad web","xp":50,"prompt":"Una aplicación permite subir archivos sin controles adecuados. ¿Qué control debe revisarse primero?","answers":["validación de archivos"],"hint":"Incluye tipo, tamaño, nombre y almacenamiento.","explanation":"Las subidas deben validarse y almacenarse de forma segura."},{"id":49,"name":"Deserialización","topic":"Seguridad web","xp":50,"prompt":"Una aplicación reconstruye objetos desde datos no confiables sin controles. ¿Qué riesgo debe revisarse?","answers":["deserialización insegura"],"hint":"El problema está en confiar en objetos serializados.","explanation":"La deserialización insegura puede alterar objetos o ejecutar comportamientos peligrosos."},{"id":50,"name":"API security","topic":"Seguridad web","xp":50,"prompt":"Una API devuelve objetos de otros usuarios porque no comprueba autorización por recurso. ¿Qué control debe reforzarse?","answers":["autorización"],"hint":"El servidor debe decidir quién puede acceder a cada objeto.","explanation":"La autorización debe validarse en el servidor."},{"id":51,"name":"Wireshark","topic":"Redes y SOC","xp":50,"prompt":"Tienes una captura PCAP de laboratorio. ¿Qué herramienta gráfica utilizarías para inspeccionarla?","answers":["Wireshark"],"hint":"Es un analizador de protocolos.","explanation":"Wireshark permite inspeccionar y filtrar tráfico."},{"id":52,"name":"Análisis PCAP","topic":"Redes y SOC","xp":50,"prompt":"En Wireshark quieres mostrar únicamente tráfico DNS. ¿Qué filtro usarías?","answers":["dns"],"hint":"Es el nombre del protocolo.","explanation":"El filtro dns muestra tráfico DNS."},{"id":53,"name":"DNS analysis","topic":"Redes y SOC","xp":50,"prompt":"En una respuesta DNS buscas el registro que asocia un nombre con IPv4. ¿Qué tipo de registro es?","answers":["A"],"hint":"Es el registro clásico de dirección.","explanation":"A asocia nombre con IPv4."},{"id":54,"name":"HTTP analysis","topic":"Redes y SOC","xp":50,"prompt":"Quieres saber qué tipo MIME devuelve un servidor HTTP. ¿Qué cabecera revisarías?","answers":["Content-Type"],"hint":"Indica el tipo de contenido.","explanation":"Content-Type informa del tipo MIME."},{"id":55,"name":"Firewall","topic":"Redes y SOC","xp":50,"prompt":"Un firewall debe permitir únicamente el tráfico necesario y bloquear lo demás. ¿Qué principio describe esta postura?","answers":["deny by default"],"hint":"Lo no permitido explícitamente se rechaza.","explanation":"Deny by default reduce exposición."},{"id":56,"name":"IDS/IPS","topic":"Redes y SOC","xp":50,"prompt":"Un sistema detecta tráfico sospechoso y puede bloquearlo automáticamente. ¿Qué control es?","answers":["IPS"],"hint":"La P significa Prevention.","explanation":"Un IPS puede bloquear tráfico detectado."},{"id":57,"name":"SIEM","topic":"Redes y SOC","xp":50,"prompt":"Una plataforma centraliza logs de muchos sistemas y correlaciona eventos. ¿Qué tecnología es?","answers":["SIEM"],"hint":"Security Information and Event Management.","explanation":"Un SIEM centraliza y correlaciona eventos."},{"id":58,"name":"Logs web","topic":"Redes y SOC","xp":50,"prompt":"Un servidor devuelve repetidamente respuestas HTTP 500. ¿Qué indican generalmente?","answers":["error del servidor"],"hint":"Los 5xx son errores del lado servidor.","explanation":"500 indica un error interno del servidor."},{"id":59,"name":"Threat hunting","topic":"Redes y SOC","xp":50,"prompt":"El analista busca proactivamente actividad maliciosa aunque no exista una alerta previa. ¿Cómo se llama?","answers":["threat hunting"],"hint":"Es búsqueda proactiva.","explanation":"Threat hunting busca señales de amenazas."},{"id":60,"name":"IOC","topic":"Redes y SOC","xp":50,"prompt":"Una IP confirmada como parte de un incidente es un ejemplo de qué?","answers":["IOC"],"hint":"Indicator of Compromise.","explanation":"Un IOC es una señal observable de compromiso."},{"id":61,"name":"Phishing awareness","topic":"Detección y forense","xp":50,"prompt":"Recibes un correo urgente que pide tus credenciales mediante un enlace. ¿Qué debes identificar?","answers":["solicitud sospechosa de credenciales"],"hint":"La urgencia y la petición de credenciales son señales.","explanation":"Los mensajes de phishing suelen presionar para entregar información."},{"id":62,"name":"Ingeniería social","topic":"Detección y forense","xp":50,"prompt":"Un atacante manipula psicológicamente a una persona para obtener información o acceso. ¿Qué técnica general es?","answers":["ingeniería social"],"hint":"Explota factores humanos.","explanation":"La ingeniería social se centra en la manipulación de personas."},{"id":63,"name":"Malware analysis seguro","topic":"Detección y forense","xp":50,"prompt":"Para analizar una muestra sospechosa sin contaminar el equipo real, ¿qué entorno aislado usarías?","answers":["sandbox"],"hint":"Es un entorno controlado.","explanation":"Una sandbox permite estudiar muestras con menor riesgo."},{"id":64,"name":"YARA","topic":"Detección y forense","xp":50,"prompt":"Quieres crear reglas para identificar patrones en archivos durante threat hunting. ¿Qué herramienta usarías?","answers":["YARA"],"hint":"Es un lenguaje de reglas de identificación.","explanation":"YARA permite detectar patrones."},{"id":65,"name":"Sigma","topic":"Detección y forense","xp":50,"prompt":"Necesitas una regla portable de detección para logs que pueda adaptarse a distintos SIEM. ¿Qué formato usarías?","answers":["Sigma"],"hint":"Es un formato de reglas de detección.","explanation":"Sigma describe detecciones de forma portable."},{"id":66,"name":"MITRE ATT&CK","topic":"Detección y forense","xp":50,"prompt":"Quieres mapear un comportamiento observado a técnicas conocidas de adversarios. ¿Qué base utilizarías?","answers":["MITRE ATT&CK"],"hint":"Es una base estructurada de tácticas y técnicas.","explanation":"ATT&CK proporciona lenguaje común para comportamientos adversarios."},{"id":67,"name":"Triage","topic":"Detección y forense","xp":50,"prompt":"El SOC recibe cientos de alertas y debe decidir cuáles investigar primero. ¿Qué proceso realiza?","answers":["triage"],"hint":"Consiste en clasificar y priorizar.","explanation":"El triage prioriza según contexto e impacto."},{"id":68,"name":"Forensics","topic":"Detección y forense","xp":50,"prompt":"Antes de analizar una evidencia digital debes registrar quién la obtuvo y qué acciones realizó. ¿Qué proceso formal es?","answers":["cadena de custodia"],"hint":"Garantiza trazabilidad.","explanation":"La cadena de custodia preserva la trazabilidad."},{"id":69,"name":"Memory forensics","topic":"Detección y forense","xp":50,"prompt":"Quieres estudiar procesos y conexiones presentes en la RAM de un equipo. ¿Qué disciplina aplicas?","answers":["forense de memoria"],"hint":"Analiza datos volátiles.","explanation":"Memory forensics analiza artefactos de memoria."},{"id":70,"name":"Timeline","topic":"Detección y forense","xp":50,"prompt":"Quieres ordenar cronológicamente eventos de archivos y sistemas durante una investigación. ¿Qué artefacto construyes?","answers":["timeline"],"hint":"Es una línea temporal.","explanation":"Una timeline ayuda a correlacionar eventos."},{"id":71,"name":"Recon autorizado","topic":"Pentesting y riesgo","xp":50,"prompt":"Antes de escanear un objetivo de laboratorio, ¿qué documento define qué sistemas y acciones están permitidos?","answers":["scope"],"hint":"Define el alcance.","explanation":"El scope limita objetivos y acciones."},{"id":72,"name":"Nmap en laboratorio","topic":"Pentesting y riesgo","xp":50,"prompt":"En un laboratorio autorizado necesitas identificar puertos abiertos. ¿Qué herramienta usarías?","answers":["Nmap"],"hint":"Es un escáner de red.","explanation":"Nmap descubre hosts y servicios dentro del alcance."},{"id":73,"name":"Enumeración de servicios","topic":"Pentesting y riesgo","xp":50,"prompt":"Tras encontrar un puerto abierto quieres saber qué servicio responde. ¿Qué actividad realizas?","answers":["enumeración"],"hint":"Busca información más detallada del servicio.","explanation":"La enumeración identifica servicios y configuraciones."},{"id":74,"name":"Banner grabbing","topic":"Pentesting y riesgo","xp":50,"prompt":"Un servicio revela nombre y versión al conectarse. ¿Cómo se llama esta técnica?","answers":["banner grabbing"],"hint":"Recoge banners del servicio.","explanation":"Banner grabbing puede identificar servicios."},{"id":75,"name":"Vulnerabilidades","topic":"Pentesting y riesgo","xp":50,"prompt":"Encuentras una debilidad con un identificador público CVE. ¿Qué representa CVE?","answers":["vulnerabilidad"],"hint":"CVE identifica vulnerabilidades conocidas.","explanation":"CVE proporciona identificadores comunes."},{"id":76,"name":"CVSS","topic":"Pentesting y riesgo","xp":50,"prompt":"Quieres priorizar una vulnerabilidad mediante una puntuación estandarizada de severidad. ¿Qué sistema usarías?","answers":["CVSS"],"hint":"Common Vulnerability Scoring System.","explanation":"CVSS ayuda a valorar severidad."},{"id":77,"name":"Gestión de parches","topic":"Pentesting y riesgo","xp":50,"prompt":"Existe un parche validado para una vulnerabilidad crítica. ¿Qué proceso debe coordinar su evaluación, prueba y despliegue?","answers":["gestión de parches"],"hint":"Incluye probar y desplegar actualizaciones.","explanation":"Patch management coordina actualizaciones."},{"id":78,"name":"Modelado de amenazas","topic":"Pentesting y riesgo","xp":50,"prompt":"Antes de desarrollar una aplicación quieres identificar amenazas y controles desde el diseño. ¿Qué disciplina aplicarías?","answers":["modelado de amenazas"],"hint":"Se realiza durante el diseño.","explanation":"Threat modeling anticipa amenazas y mitigaciones."},{"id":79,"name":"OSINT ético","topic":"Pentesting y riesgo","xp":50,"prompt":"Necesitas investigar información pública dentro de un alcance autorizado. ¿Qué disciplina utilizarías?","answers":["OSINT"],"hint":"Open Source Intelligence.","explanation":"OSINT usa fuentes abiertas."},{"id":80,"name":"Scope y reglas","topic":"Pentesting y riesgo","xp":50,"prompt":"En un pentest, ¿cómo se denomina el conjunto de reglas que establece límites, horarios y acciones permitidas?","answers":["ROE"],"hint":"Rules of Engagement.","explanation":"Las ROE definen cómo se ejecuta una prueba."},{"id":81,"name":"Burp Suite","topic":"AppSec y pentesting","xp":50,"prompt":"Quieres interceptar y estudiar peticiones HTTP de una aplicación propia de laboratorio. ¿Qué herramienta usarías?","answers":["Burp Suite"],"hint":"Es una plataforma de pruebas web.","explanation":"Burp Suite permite inspeccionar tráfico HTTP."},{"id":82,"name":"Proxy HTTP","topic":"AppSec y pentesting","xp":50,"prompt":"Quieres colocar un intermediario entre navegador y servidor para observar peticiones. ¿Qué componente necesitas?","answers":["proxy"],"hint":"Actúa como intermediario.","explanation":"Un proxy permite inspeccionar tráfico."},{"id":83,"name":"Repeater","topic":"AppSec y pentesting","xp":50,"prompt":"En Burp quieres reenviar manualmente una petición varias veces para estudiar las respuestas. ¿Qué módulo usarías?","answers":["Repeater"],"hint":"Su nombre describe la función.","explanation":"Repeater permite repetir peticiones."},{"id":84,"name":"Intruder en sandbox","topic":"AppSec y pentesting","xp":50,"prompt":"En una aplicación de laboratorio necesitas probar de forma controlada diferentes valores de entrada. ¿Qué módulo de Burp está diseñado para ello?","answers":["Intruder"],"hint":"Automatiza variaciones de una petición.","explanation":"Intruder permite realizar pruebas automatizadas controladas."},{"id":85,"name":"ZAP","topic":"AppSec y pentesting","xp":50,"prompt":"Buscas una herramienta abierta de OWASP para proxy y pruebas web de laboratorio. ¿Cuál usarías?","answers":["OWASP ZAP"],"hint":"Es un proyecto de OWASP.","explanation":"OWASP ZAP sirve para pruebas de seguridad web."},{"id":86,"name":"Nikto en laboratorio","topic":"AppSec y pentesting","xp":50,"prompt":"Quieres comprobar configuraciones y problemas conocidos de un servidor web autorizado. ¿Qué herramienta clásica usarías?","answers":["Nikto"],"hint":"Es un escáner de servidores web.","explanation":"Nikto realiza comprobaciones automatizadas."},{"id":87,"name":"Gobuster en laboratorio","topic":"AppSec y pentesting","xp":50,"prompt":"Necesitas descubrir rutas publicadas en una aplicación de laboratorio. ¿Qué herramienta puedes utilizar?","answers":["Gobuster"],"hint":"Es una herramienta de descubrimiento.","explanation":"Gobuster descubre contenido dentro de un alcance autorizado."},{"id":88,"name":"ffuf en sandbox","topic":"AppSec y pentesting","xp":50,"prompt":"Necesitas probar valores de una ruta en una aplicación de práctica. ¿Qué herramienta de fuzzing usarías?","answers":["ffuf"],"hint":"Es un fuzzer web.","explanation":"ffuf automatiza pruebas de rutas y parámetros."},{"id":89,"name":"Metasploit en sandbox","topic":"AppSec y pentesting","xp":50,"prompt":"En una máquina de laboratorio vulnerable necesitas validar de forma controlada una vulnerabilidad conocida. ¿Qué framework puede utilizarse?","answers":["Metasploit"],"hint":"Solo en sistemas autorizados.","explanation":"Metasploit permite validar vulnerabilidades en laboratorio."},{"id":90,"name":"Exploit lifecycle","topic":"AppSec y pentesting","xp":50,"prompt":"Antes de validar una vulnerabilidad con una técnica de explotación en un laboratorio, ¿qué debes confirmar?","answers":["autorización"],"hint":"Debe estar dentro del alcance.","explanation":"La validación debe respetar autorización y alcance."},{"id":91,"name":"Red team planning","topic":"Red Team y defensa","xp":50,"prompt":"Un ejercicio simula a un adversario para evaluar defensas. ¿Qué equipo ofensivo controlado participa?","answers":["red team"],"hint":"Es el equipo que emula adversarios.","explanation":"Red Team evalúa defensas desde una perspectiva adversaria autorizada."},{"id":92,"name":"Purple team","topic":"Red Team y defensa","xp":50,"prompt":"Un ejercicio combina el trabajo ofensivo y defensivo para mejorar detecciones. ¿Qué enfoque es?","answers":["purple team"],"hint":"Integra Red Team y Blue Team.","explanation":"Purple Team favorece el aprendizaje conjunto."},{"id":93,"name":"Privilege escalation conceptos","topic":"Red Team y defensa","xp":50,"prompt":"Una cuenta obtiene permisos superiores a los inicialmente asignados debido a un fallo. ¿Qué concepto es?","answers":["escalada de privilegios"],"hint":"Pasa a un nivel superior de permisos.","explanation":"La escalada aumenta privilegios."},{"id":94,"name":"Persistencia conceptos","topic":"Red Team y defensa","xp":50,"prompt":"Un adversario intenta conservar acceso después de reinicios o cambios de sesión. ¿Qué concepto debes investigar?","answers":["persistencia"],"hint":"Busca mantener acceso.","explanation":"Persistencia describe mantener acceso a lo largo del tiempo."},{"id":95,"name":"Movimiento lateral conceptos","topic":"Red Team y defensa","xp":50,"prompt":"Un atacante pasa de un sistema comprometido a otro dentro de la red. ¿Qué técnica general representa?","answers":["movimiento lateral"],"hint":"Se desplaza entre sistemas.","explanation":"El movimiento lateral amplía el alcance dentro de la red."},{"id":96,"name":"Segmentación","topic":"Red Team y defensa","xp":50,"prompt":"Quieres impedir que una cuenta comprometida alcance todos los servidores internos. ¿Qué control aplicarías?","answers":["segmentación"],"hint":"Divide la red en zonas.","explanation":"La segmentación limita rutas y movimiento lateral."},{"id":97,"name":"Hardening","topic":"Red Team y defensa","xp":50,"prompt":"Quieres reducir servicios innecesarios y configuraciones débiles de un servidor. ¿Qué proceso realizas?","answers":["hardening"],"hint":"Significa endurecimiento.","explanation":"Hardening reduce la superficie de ataque."},{"id":98,"name":"Detección","topic":"Red Team y defensa","xp":50,"prompt":"Un SOC genera una alerta cuando identifica patrones sospechosos en logs. ¿Qué capacidad está implementando?","answers":["detección"],"hint":"Identifica señales sospechosas.","explanation":"La detección convierte señales en alertas investigables."},{"id":99,"name":"Respuesta","topic":"Red Team y defensa","xp":50,"prompt":"Tras confirmar un incidente, el equipo aísla el sistema afectado para limitar el impacto. ¿Qué fase representa?","answers":["contención"],"hint":"Busca limitar propagación y daño.","explanation":"La contención limita el impacto durante la respuesta."},{"id":100,"name":"Capstone","topic":"Red Team y defensa","xp":50,"prompt":"En el proyecto final debes identificar activos, analizar riesgos, estudiar evidencias y proponer controles. ¿Qué tipo de ejercicio integrador es?","answers":["capstone"],"hint":"Es el proyecto final de integración.","explanation":"Un capstone integra competencias de varios dominios."}];
+function persistProgress(){
+  localStorage.setItem("cyberlab_current_level",String(currentLevel));
+  localStorage.setItem("cyberlab_completed_levels",JSON.stringify(completedLevels));
+  localStorage.setItem("cyberlab_user_xp",String(userXP));
+  localStorage.setItem("cyberlab_logged_in",loggedIn?"1":"0");
+  localStorage.setItem("cyberlab_username",username);
+}
+function getUserLevel(){return Math.floor(userXP/USER_XP_PER_LEVEL)+1}
+function updateProfile(){
+  const xp=document.getElementById("xp"), ul=document.getElementById("userLevel"), av=document.getElementById("avatar");
+  if(xp)xp.textContent=userXP+" XP";
+  if(ul)ul.textContent="Usuario Lv. "+getUserLevel();
+  if(av)av.textContent=(username||"A").slice(0,1).toUpperCase();
+  const sx=document.getElementById("statXP");if(sx)sx.textContent=userXP;
+  const su=document.getElementById("statUserLevel");if(su)su.textContent=getUserLevel();
+  const sc=document.getElementById("statCompleted");if(sc)sc.textContent=completedLevels.length+"/100";
+}
+function openLogin(levelNumber){
+  const gate=document.getElementById("loginGate");gate.dataset.target=levelNumber;gate.style.display="flex";document.getElementById("loginEmail").focus();
+}
+function closeLogin(){document.getElementById("loginGate").style.display="none"}
+function doLogin(){
+  const email=document.getElementById("loginEmail").value.trim();
+  const name=document.getElementById("loginName").value.trim() || (email.split("@")[0]||"Alumno");
+  if(!email || !email.includes("@")){toast("Introduce un correo válido");return}
+  username=name;loggedIn=true;persistProgress();updateProfile();closeLogin();
+  startLevel(Number(document.getElementById("loginGate").dataset.target||6));
+  toast("Sesión iniciada · progreso habilitado");
+}
+function renderLevels(){
+  const g=document.getElementById("levelGrid");if(!g)return;g.innerHTML="";
+  levels.forEach((name,i)=>{
+    const number=i+1,completed=completedLevels.includes(number),available=number<=FREE_LEVELS||loggedIn;
+    const unlocked=(number===1||completedLevels.includes(number-1))&&available;
+    const b=document.createElement("button");
+    b.className="level "+(completed?"done ":(unlocked?"current ":"locked"));
+    b.innerHTML=`<strong>${completed?"✓":number}</strong><small>${name}</small><em>${number<=FREE_LEVELS?"GRATIS":(loggedIn?"CUENTA":"🔒")}</em>`;
+    b.onclick=()=>{
+      if(!available){openLogin(number);return}
+      if(!unlocked&&!completed){toast("Completa el nivel "+(number-1)+" para desbloquear este reto.");return}
+      startLevel(number);
+    };
+    g.appendChild(b);
+  });
+  const c=document.getElementById("levelCounter");if(c)c.textContent=completedLevels.length+" / 100";
+  updateProfile();
+}
+function renderCurrentLevel(){renderLevels();updateProfile()}
+function startLevel(n){
+  if(n>FREE_LEVELS&&!loggedIn){openLogin(n);return}
+  if(n>1&&!completedLevels.includes(n-1)&&!completedLevels.includes(n)){toast("Primero completa el nivel "+(n-1));return}
+  currentLevel=n;persistProgress();show("lab");
+  const d=levelData[n-1];
+  document.getElementById("labKicker").textContent=`Nivel ${n} · ${n<=FREE_LEVELS?"GRATIS":"CUENTA"}`;
+  document.getElementById("labTitle").textContent=d.name;
+  document.getElementById("labPrompt").textContent=d.prompt;
+  document.getElementById("labXP").textContent="+"+d.xp+" XP";
+  document.getElementById("answer").value="";
+  document.getElementById("feedback").className="feedback";document.getElementById("feedback").innerHTML="";
+  document.getElementById("hint").style.display="none";document.getElementById("hint").textContent="💡 "+d.hint;
+  document.getElementById("labLockNote").textContent=n<=FREE_LEVELS?"Nivel gratuito. Completa el reto para ganar XP y desbloquear el siguiente.":"Nivel de cuenta. Tu progreso y XP se guardan en este navegador.";
+  document.getElementById("answer").focus();updateProfile();
+}
+function showHint(){document.getElementById("hint").style.display="block"}
+function checkAnswer(){
+  const d=levelData[currentLevel-1];if(!d)return;
+  const v=document.getElementById("answer").value.trim().toLowerCase().replace(/\s+/g," ");
+  const f=document.getElementById("feedback");
+  if(!v){f.className="feedback bad";f.innerHTML="<b>⚠ Escribe una respuesta.</b> Pulsa Enter o Comprobar para validarla.";return}
+  const ok=d.answers.some(a=>v===a||v.includes(a));
+  if(ok){
+    const first=!completedLevels.includes(currentLevel);
+    f.className="feedback ok";
+    f.innerHTML=`<b>✓ ¡CORRECTO!</b> Nivel ${currentLevel} completado.${first?` Has ganado <b>+${d.xp} XP</b>.`:" Este nivel ya estaba completado."}<br><span style="color:#b9dfcf">${d.explanation}</span>`;
+    if(first){completedLevels.push(currentLevel);completedLevels.sort((a,b)=>a-b);userXP+=d.xp;persistProgress();updateProfile();renderLevels()}
+    const next=currentLevel+1;
+    if(next<=100){
+      const btn=document.createElement("button");btn.className="btn primary";btn.style.marginTop="10px";
+      btn.textContent=next>FREE_LEVELS&&!loggedIn?"🔒 Iniciar sesión para nivel "+next:"Continuar al nivel "+next+" →";
+      btn.onclick=()=>startLevel(next);f.appendChild(document.createElement("br"));f.appendChild(btn);
+    }
+    toast(first?`+${d.xp} XP · ¡Nivel ${currentLevel} completado!`:"Nivel ya completado");
+  }else{
+    f.className="feedback bad";f.innerHTML=`<b>✕ Incorrecto.</b> Revisa el concepto y vuelve a intentarlo. <button class="btn" style="margin-left:8px" onclick="showHint()">Ver pista</button>`;
+  }
+}
+
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>t.style.display="none",2200)}
+document.getElementById("cmd").addEventListener("keydown",e=>{
+ if(e.key!=="Enter")return;
+ const c=e.target.value.trim();e.target.value="";const out=document.getElementById("out");
+ const replies={
+  help:"Comandos del sandbox: help · pwd · ls · ip addr · whoami · clear",
+  pwd:"/home/student",
+  ls:"notes.txt  lab  readme.md",
+  "ip addr":"1: lo  inet 127.0.0.1/8\n2: eth0  inet 10.10.10.24/24",
+  ifconfig:"eth0  inet 10.10.10.24  netmask 255.255.255.0\nlo    inet 127.0.0.1",
+  whoami:"student"
+ };
+ if(c==="clear"){out.textContent="";return}
+ out.textContent+=(out.textContent?"\n":"")+`$ ${c}\n`+(replies[c]||"Comando disponible solo dentro de los ejercicios del sandbox. Escribe \"help\".");
+ out.parentElement.scrollTop=out.parentElement.scrollHeight;
+});
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&document.activeElement&&document.activeElement.id==="answer"){
+    e.preventDefault();checkAnswer();
+  }
+});
+
+const theory=[
+["01","Fundamentos de ciberseguridad","Bases, amenazas, principios CIA, seguridad organizativa y certificaciones.",
+["Introducción y terminología","Amenazas y vulnerabilidades","Políticas y estándares","Gestión de riesgos y continuidad","Buenas prácticas"],
+["fundamentos","20 min"],[
+["¿Qué propiedad busca impedir modificaciones no autorizadas?","Integridad","Confidencialidad","Disponibilidad","Anonimato",0],
+["¿Qué describe mejor una vulnerabilidad?","Una debilidad explotable","Un ataque exitoso","Un firewall","Una política",0]
+]],
+["02","Hacking ético","Reconocimiento, enumeración, vulnerabilidades, pruebas de penetración y responsabilidad profesional.",
+["Reconocimiento pasivo/activo","Enumeración","Análisis de vulnerabilidades","Pentesting por fases","Reglas de compromiso"],
+["hacking","25 min"],[
+["Antes de una prueba de penetración profesional, ¿qué es esencial?","Definir alcance y autorización","Empezar a escanear","Publicar resultados","Borrar logs",0],
+["¿Qué fase busca comprender el objetivo antes de explotar?","Reconocimiento","Persistencia","Exfiltración","Recuperación",0]
+]],
+["03","Ética, legalidad y privacidad","Marco profesional para trabajar con sistemas, datos y evidencias de forma autorizada.",
+["Ética profesional","Normativa","Delitos informáticos","Privacidad y protección de datos","Responsabilidad"],
+["legal","18 min"],[
+["¿Qué principio debe existir antes de evaluar un sistema ajeno?","Autorización","Curiosidad","Anonimato","Urgencia",0],
+["¿Qué debe limitar una prueba autorizada?","El alcance acordado","El navegador","La RAM","El teclado",0]
+]],
+["04","Criptografía y autenticación","Cifrado simétrico/asimétrico, firmas, certificados, PKI y autenticación.",
+["Criptografía simétrica","Criptografía asimétrica","Firmas digitales","Certificados","PKI y autenticación"],
+["crypto","30 min"],[
+["¿Para qué se usa principalmente una firma digital?","Integridad y autenticidad","Compresión","Ocultar una IP","Acelerar DNS",0],
+["¿Qué infraestructura gestiona certificados y confianza?","PKI","FTP","DHCP","ARP",0]
+]],
+["05","Análisis de riesgos","Identificación, evaluación, tratamiento y seguimiento del riesgo tecnológico.",
+["Identificación","Análisis cualitativo","Análisis cuantitativo","Tratamiento","Monitorización"],
+["riesgos","25 min"],[
+["¿Qué busca el análisis de riesgos?","Priorizar amenazas y medidas","Eliminar Internet","Aumentar privilegios","Cambiar DNS",0],
+["¿Qué acción reduce un riesgo?","Aplicar un control adecuado","Ignorarlo","Ocultarlo","Duplicarlo",0]
+]],
+["06","Auditoría de sistemas","Metodologías, evidencias, controles, hallazgos y mejora continua.",
+["Auditoría informática","ISO 27001","Auditoría técnica","Evidencias","Plan de mejora"],
+["auditoria","22 min"],[
+["Un hallazgo de auditoría debe apoyarse en…","Evidencia verificable","Opiniones","Rumores","Contraseñas",0],
+["El objetivo de un control de seguridad es…","Reducir un riesgo","Crear vulnerabilidades","Evitar auditorías","Ocultar activos",0]
+]],
+["07","Análisis forense","Adquisición de evidencias, cadena de custodia, análisis e informe pericial.",
+["Adquisición","Cadena de custodia","Sistemas Windows/Linux","Análisis de artefactos","Informe técnico"],
+["forense","28 min"],[
+["¿Qué protege la cadena de custodia?","Trazabilidad de la evidencia","Velocidad de red","Disponibilidad web","Cifrado Wi-Fi",0],
+["¿Qué debe preservar un analista forense?","Integridad de la evidencia","Cambios arbitrarios","Credenciales personales","Publicidad",0]
+]],
+["08","Seguridad de redes","Arquitecturas defensivas, firewalls, IDS/IPS, VPN y redes inalámbricas.",
+["Seguridad perimetral","Firewalls","IDS/IPS","VPN","Wi-Fi seguro"],
+["redes","27 min"],[
+["¿Qué detecta principalmente un IDS?","Actividad sospechosa","Velocidad de CPU","Temperatura","Resolución DNS",0],
+["¿Qué aporta una segmentación adecuada?","Reduce el movimiento lateral","Elimina todo riesgo","Aumenta superficie","Desactiva logs",0]
+]],
+["09","Cloud security","Modelos cloud, responsabilidades compartidas, gobernanza y protección de recursos.",
+["IaaS/PaaS/SaaS","Responsabilidad compartida","Identidades cloud","Gobernanza","Seguridad y migración"],
+["cloud","24 min"],[
+["En cloud, la seguridad suele depender de…","Responsabilidad compartida","Un único proveedor siempre","El usuario solamente","Nadie",0],
+["Una práctica esencial en cloud es…","Mínimo privilegio","Credenciales compartidas","Puertos abiertos","Logs desactivados",0]
+]],
+["10","Arquitectura y desarrollo seguro","Diseño seguro, requisitos, servidores, aplicaciones y tolerancia frente a terceros.",
+["Principios de arquitectura","Requisitos de seguridad","Desarrollo seguro","Seguridad de servidores","Terceros"],
+["arquitectura","26 min"],[
+["¿Cuándo debe introducirse la seguridad en un desarrollo?","Desde el diseño","Solo al final","Después del incidente","Nunca",0],
+["¿Qué reduce el impacto de un fallo de un componente?","Diseño resiliente","Una contraseña débil","Eliminar backups","Desactivar monitorización",0]
+]],
+["11","Infraestructuras críticas","Protección de servicios esenciales, amenazas, controles y respuesta a incidentes.",
+["Sistemas esenciales","OT/ICS","Amenazas","Defensas","Gestión de incidentes"],
+["criticas","22 min"],[
+["¿Por qué requieren protección especial las infraestructuras críticas?","Su impacto social puede ser elevado","Porque no usan redes","Porque nunca fallan","Porque no necesitan controles",0],
+["Una medida defensiva importante es…","Segmentación y monitorización","Exponer servicios","Compartir credenciales","Eliminar redundancia",0]
+]],
+["12","Mobile security & tendencias","Seguridad móvil, aplicaciones, cifrado y tendencias emergentes.",
+["Dispositivos móviles","Aplicaciones seguras","Protección de datos","Cifrado","Políticas móviles"],
+["mobile","20 min"],[
+["Una aplicación móvil segura debe…","Validar entradas y proteger secretos","Guardar claves en texto plano","Desactivar actualizaciones","Confiar en todo input",0],
+["Una política móvil debe definir…","Controles y responsabilidades","Solo el fondo de pantalla","El modelo de teléfono","Nada",0]
+]]
+];
+const theoryPdfFiles=["fundamentos-ciberseguridad.pdf", "hacking-etico.pdf", "etica-legalidad-privacidad.pdf", "criptografia-autenticacion.pdf", "analisis-riesgos.pdf", "auditoria-seguridad.pdf", "forense-digital.pdf", "seguridad-redes.pdf", "cloud-security.pdf", "arquitectura-desarrollo-seguro.pdf", "infraestructuras-criticas.pdf", "seguridad-movil-tendencias.pdf"];
+function renderTheory(){
+ const grid=document.getElementById("theoryGrid");
+ if(!grid){return;}
+ grid.innerHTML=theory.map((m,idx)=>`
+ <article class="module">
+  <div class="moduleTop"><div><span class="badge">MÓDULO ${m[0]}</span><h3 style="margin-top:8px">${m[1]}</h3></div><span style="color:var(--muted);font-size:11px">${m[4][1]}</span></div>
+  <p>${m[2]}</p>
+  <ul>${m[3].map(x=>`<li>${x}</li>`).join("")}</ul>
+  <div class="pdfRow"><button class="testBtn" onclick="openTheoryPDF(${idx})">▣ Abrir PDF de teoría</button><button class="testBtn" onclick="toggleTest(${idx})">✓ Realizar tipo test</button></div>
+  <div class="test" id="test-${idx}">
+   ${m[5].map((q,qi)=>`<div class="q"><b>${qi+1}. ${q[0]}</b>${q.slice(1,5).map((a,ai)=>`<label><input type="radio" name="m${idx}q${qi}" value="${ai}"> ${a}</label>`).join("")}</div>`).join("")}
+   <button class="btn primary" onclick="gradeTest(${idx})">Corregir test</button><div class="result" id="result-${idx}"></div>
+  </div>
+ </article>`).join("");
+}
+function toggleTest(i){document.getElementById("test-"+i).style.display="block"}
+function openTheoryPDF(i){
+ const file=theoryPdfFiles[i];
+ if(!file){toast("Este módulo no tiene PDF asociado.");return}
+ const url=new URL("pdf/"+file,document.baseURI).href;
+ const win=window.open(url,"_blank");
+ if(!win){toast("El navegador bloqueó la ventana. Permite ventanas emergentes.");}
+}
+
+function gradeTest(i){
+ const m=theory[i], qs=m[5]; let score=0;
+ qs.forEach((q,qi)=>{const a=document.querySelector(`input[name="m${i}q${qi}"]:checked`);if(a && Number(a.value)===q[5])score++});
+ const r=document.getElementById("result-"+i);r.className="result "+(score===qs.length?"good":"bad");
+ r.style.display="block";r.innerHTML=score===qs.length?`<b>✓ Test superado (${score}/${qs.length})</b> · Módulo completado. +100 XP`:`<b>Resultado: ${score}/${qs.length}</b> · Repasa el documento y vuelve a intentarlo.`;
+}
+renderTheory();
+renderLevels();renderTools();
+renderCurrentLevel();
+</script>
+</body>
+</html>

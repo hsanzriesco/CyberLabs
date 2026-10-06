@@ -1,0 +1,702 @@
+[
+  {
+    "id": 1,
+    "title": "Fundamentos de redes",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 2,
+    "title": "Direcciones IP",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 3,
+    "title": "Puertos TCP/UDP",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 4,
+    "title": "DNS",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 5,
+    "title": "HTTP básico",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 6,
+    "title": "TLS y certificados",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 7,
+    "title": "Modelo OSI",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 8,
+    "title": "Subnetting",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 9,
+    "title": "ARP",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 50
+  },
+  {
+    "id": 10,
+    "title": "DHCP",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 11,
+    "title": "Linux: navegación",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 12,
+    "title": "Linux: archivos",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 13,
+    "title": "Linux: permisos",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 14,
+    "title": "Linux: procesos",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 15,
+    "title": "Linux: usuarios",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 16,
+    "title": "Linux: grep/find",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 17,
+    "title": "Linux: pipes",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 18,
+    "title": "Linux: logs",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 19,
+    "title": "Linux: servicios",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 60
+  },
+  {
+    "id": 20,
+    "title": "Linux: scripting",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 21,
+    "title": "Python básico",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 22,
+    "title": "Python para seguridad",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 23,
+    "title": "Regex",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 24,
+    "title": "Hashes",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 25,
+    "title": "Criptografía básica",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 26,
+    "title": "Codificación",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 27,
+    "title": "Base64",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 28,
+    "title": "JWT",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 29,
+    "title": "Sesiones",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 70
+  },
+  {
+    "id": 30,
+    "title": "Cookies",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 31,
+    "title": "HTTP requests",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 32,
+    "title": "Headers",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 33,
+    "title": "Métodos HTTP",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 34,
+    "title": "Status codes",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 35,
+    "title": "Formularios",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 36,
+    "title": "Autenticación",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 37,
+    "title": "Control de acceso",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 38,
+    "title": "CORS",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 39,
+    "title": "CSRF",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 80
+  },
+  {
+    "id": 40,
+    "title": "CSP",
+    "difficulty": "principiante",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 41,
+    "title": "OWASP Top 10",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 42,
+    "title": "SQLi: conceptos",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 43,
+    "title": "XSS: conceptos",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 44,
+    "title": "Path traversal",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 45,
+    "title": "SSRF: conceptos",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 46,
+    "title": "Command injection",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 47,
+    "title": "IDOR",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 48,
+    "title": "File upload",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 49,
+    "title": "Deserialización",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 90
+  },
+  {
+    "id": 50,
+    "title": "API security",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 51,
+    "title": "Wireshark",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 52,
+    "title": "Análisis PCAP",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 53,
+    "title": "DNS analysis",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 54,
+    "title": "HTTP analysis",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 55,
+    "title": "Firewall",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 56,
+    "title": "IDS/IPS",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 57,
+    "title": "SIEM",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 58,
+    "title": "Logs web",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 59,
+    "title": "Threat hunting",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 100
+  },
+  {
+    "id": 60,
+    "title": "IOC",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 61,
+    "title": "Phishing awareness",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 62,
+    "title": "Ingeniería social",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 63,
+    "title": "Malware analysis seguro",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 64,
+    "title": "YARA",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 65,
+    "title": "Sigma",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 66,
+    "title": "MITRE ATT&CK",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 67,
+    "title": "Triage",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 68,
+    "title": "Forensics",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 69,
+    "title": "Memory forensics",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 110
+  },
+  {
+    "id": 70,
+    "title": "Timeline",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 71,
+    "title": "Recon autorizado",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 72,
+    "title": "Nmap en laboratorio",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 73,
+    "title": "Enumeración de servicios",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 74,
+    "title": "Banner grabbing",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 75,
+    "title": "Vulnerabilidades",
+    "difficulty": "intermedio",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 76,
+    "title": "CVSS",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 77,
+    "title": "Gestión de parches",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 78,
+    "title": "Modelado de amenazas",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 79,
+    "title": "OSINT ético",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 120
+  },
+  {
+    "id": 80,
+    "title": "Scope y reglas",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 81,
+    "title": "Burp Suite",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 82,
+    "title": "Proxy HTTP",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 83,
+    "title": "Repeater",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 84,
+    "title": "Intruder en sandbox",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 85,
+    "title": "ZAP",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 86,
+    "title": "Nikto en laboratorio",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 87,
+    "title": "Gobuster en laboratorio",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 88,
+    "title": "ffuf en sandbox",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 89,
+    "title": "Metasploit en sandbox",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 130
+  },
+  {
+    "id": 90,
+    "title": "Exploit lifecycle",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 91,
+    "title": "Red team planning",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 92,
+    "title": "Purple team",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 93,
+    "title": "Privilege escalation conceptos",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 94,
+    "title": "Persistencia conceptos",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 95,
+    "title": "Movimiento lateral conceptos",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 96,
+    "title": "Segmentación",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 97,
+    "title": "Hardening",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 98,
+    "title": "Detección",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 99,
+    "title": "Respuesta",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 140
+  },
+  {
+    "id": 100,
+    "title": "Capstone",
+    "difficulty": "avanzado",
+    "safe_scope": "sandbox",
+    "xp": 150
+  }
+]
